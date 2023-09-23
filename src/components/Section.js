@@ -6,7 +6,7 @@ import "../css/section.css";
 const handleAdd = () => {};
 const handleEdit = () => {};
 
-function Section({ data, heading, groupingType }) {
+function Section({ data, heading}) {
   return (
     <div className="section-container">
       <SectionHeader
@@ -20,7 +20,6 @@ function Section({ data, heading, groupingType }) {
         return (
           <Card
             key={item.id}
-            groupingType={groupingType}
             id={item.id}
             priority={item.priority}
             tags={item.tags}

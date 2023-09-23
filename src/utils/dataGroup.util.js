@@ -39,7 +39,7 @@ export function groupByUser(data) {
 export function groupByPriority(data) {
   let newTickets = [];
   data.tickets.forEach((ticket) => {
-    const priorityIndex = PRIORITIES_ARRAY.indexOf(ticket.priority);
+    const priorityIndex = ticket.priority;
     if (newTickets[priorityIndex]) {
       newTickets[priorityIndex].push(ticket);
     } else {

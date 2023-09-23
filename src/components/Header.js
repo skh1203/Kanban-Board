@@ -1,11 +1,8 @@
 import React from 'react'
 import "../css/header.css";
 import { useState } from "react";
-export default function Header() {
+export default function Header({setGrouping, setOrdering}) {
     const [display, setDisplay] = useState(false);
-    const [grouping, setGrouping] = useState("status");
-    const [ordering, setOrdering] = useState("priority");
-
     const handleDisplay = () => {
         setDisplay(!display);
     };
@@ -22,10 +19,14 @@ export default function Header() {
 						<div className="type">Grouping</div>
 						<div className="value">
 							<div class="select-dropdown">
-								<select>
-									<option value="Option 1">First Option</option>
-									<option value="Option 2">2nd Option</option>
-									<option value="Option 3">Option Number 3</option>
+								<select
+									onChange={(e) => {
+										setGrouping(e.target.value);
+									}}
+								>
+									<option value="status">Status</option>
+									<option value="user">User</option>
+									<option value="priority">Priority</option>
 								</select>
 							</div>
 						</div>
@@ -34,10 +35,13 @@ export default function Header() {
 						<div className="type">Ordering </div>
 						<div className="value">
 							<div class="select-dropdown">
-								<select>
-									<option value="Option 1">First Option</option>
-									<option value="Option 2">2nd Option</option>
-									<option value="Option 3">Option Number 3</option>
+								<select
+									onChange={(e) => {
+										setOrdering(e.target.value);
+									}}
+								>
+									<option value="priority">Priority</option>
+									<option value="title">Title</option>
 								</select>
 							</div>
 						</div>

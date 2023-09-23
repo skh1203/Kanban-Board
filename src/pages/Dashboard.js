@@ -6,164 +6,85 @@ import axios from "axios";
 import Header from "../components/Header";
 
 import {
-  groupByPriority,
-  groupByStatus,
-  groupByUser,
+	groupByPriority,
+	groupByStatus,
+	groupByUser,
 } from "../utils/dataGroup.util";
 import {
-  sortSectionByPriority,
-  sortSectionByTitle,
+	sortSectionByPriority,
+	sortSectionByTitle,
 } from "../utils/dataSort.util";
 
 const STATUS_ARRAY = ["Backlog", "Todo", "In Progress", "Done", "Canceled"];
 const PRIORITIES_ARRAY = ["No Priority", "Low", "Medium", "High", "Urgent"];
 
 export default function Dashboard() {
-  const [ogData, setOgData] = useState([]);
-  const [data, setData] = useState([]);
+	const [ogData, setOgData] = useState();
+	const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://api.quicksell.co/v1/internal/frontend-assignment")
-      .then((res) => {
-        setOgData((prev) => res.data);
-        setData((prev) => groupByStatus(res.data));
-      });
-  }, []);
+	const [grouping, setGrouping] = useState("status");
+	const [ordering, setOrdering] = useState("priority");
 
-  return (
-    <>
-      <div className="dashboard-header">
-        <Header/>
-      </div>
-      <div className="dashboard-container">
-        {data?.tickets &&
-          data?.tickets?.map((item) => {
-            return (
-              <Section
-                key={item.id}
-                heading={
-                  STATUS_ARRAY[STATUS_ARRAY.indexOf(item[0].status)] || "Todo"
-                }
-                data={item}
-                groupingType={"Status"}
-              />
-            );
-          })}
-      </div>
-    </>
-  );
+	const handleChange = () => {
+		if (!ogData) return;
+		if (grouping === "status") {
+			setData((prev) => groupByStatus(ogData));
+		} else if (grouping === "user") {
+			setData((prev) => groupByUser(ogData));
+		} else if (grouping === "priority") {
+			setData((prev) => groupByPriority(ogData));
+		}
+
+		if (ordering === "priority") {
+			setData((prev) => sortSectionByPriority(prev));
+		} else if (ordering === "title") {
+			setData((prev) => sortSectionByTitle(prev));
+		}
+	};
+
+	useEffect(handleChange, [grouping, ordering]);
+
+	useEffect(() => {
+		axios
+			.get("https://api.quicksell.co/v1/internal/frontend-assignment")
+			.then((res) => {
+				setOgData((prev) => res.data);
+				setData((prev) => groupByStatus(res.data));
+				setData((prev) => sortSectionByPriority(prev));
+			});
+	}, []);
+
+	const getHeading = (item, users) => {
+		if (grouping === "status") {
+			return item[0]?.status;
+		} else if (grouping === "user") {
+			return (
+				users.find((user) => user.id === item[0].userId)?.name || "Unknown"
+			);
+		} else if (grouping === "priority") {
+			return PRIORITIES_ARRAY[item[0]?.priority];
+		}
+	};
+
+	return (
+		<>
+			<div className="parent">
+				<div className="dashboard-header">
+					<Header setGrouping={setGrouping} setOrdering={setOrdering} />
+				</div>
+				<div className="dashboard-container">
+					{data?.tickets &&
+						data?.tickets?.map((item) => {
+							return (
+								<Section
+									key={item.id}
+									heading={getHeading(item, data.users)}
+									data={item}
+								/>
+							);
+						})}
+				</div>
+			</div>
+		</>
+	);
 }
-
-const test = {
-  tickets: [
-    {
-      id: "CAM-1",
-      title: "Update User Profile Page UI",
-      tag: ["Feature request"],
-      userId: "usr-1",
-      status: "Todo",
-      priority: 4,
-    },
-    {
-      id: "CAM-2",
-      title:
-        "Add Multi-Language Support - Enable multi-language support within the application.",
-      tag: ["Feature Request"],
-      userId: "usr-2",
-      status: "In progress",
-      priority: 3,
-    },
-    {
-      id: "CAM-3",
-      title: "Optimize Database Queries for Performance",
-      tag: ["Feature Request"],
-      userId: "usr-2",
-      status: "In progress",
-      priority: 1,
-    },
-    {
-      id: "CAM-4",
-      title: "Implement Email Notification System",
-      tag: ["Feature Request"],
-      userId: "usr-1",
-      status: "In progress",
-      priority: 3,
-    },
-    {
-      id: "CAM-5",
-      title: "Enhance Search Functionality",
-      tag: ["Feature Request"],
-      userId: "usr-5",
-      status: "In progress",
-      priority: 0,
-    },
-    {
-      id: "CAM-6",
-      title: "Third-Party Payment Gateway",
-      tag: ["Feature Request"],
-      userId: "usr-2",
-      status: "Todo",
-      priority: 1,
-    },
-    {
-      id: "CAM-7",
-      title: "Create Onboarding Tutorial for New Users",
-      tag: ["Feature Request"],
-      userId: "usr-1",
-      status: "Backlog",
-      priority: 2,
-    },
-    {
-      id: "CAM-8",
-      title: "Implement Role-Based Access Control (RBAC)",
-      tag: ["Feature Request"],
-      userId: "usr-3",
-      status: "In progress",
-      priority: 3,
-    },
-    {
-      id: "CAM-9",
-      title: "Upgrade Server Infrastructure",
-      tag: ["Feature Request"],
-      userId: "usr-5",
-      status: "Todo",
-      priority: 2,
-    },
-    {
-      id: "CAM-10",
-      title: "Conduct Security Vulnerability Assessment",
-      tag: ["Feature Request"],
-      userId: "usr-4",
-      status: "Backlog",
-      priority: 1,
-    },
-  ],
-  users: [
-    {
-      id: "usr-1",
-      name: "Anoop sharma",
-      available: false,
-    },
-    {
-      id: "usr-2",
-      name: "Yogesh",
-      available: true,
-    },
-    {
-      id: "usr-3",
-      name: "Shankar Kumar",
-      available: true,
-    },
-    {
-      id: "usr-4",
-      name: "Ramesh",
-      available: true,
-    },
-    {
-      id: "usr-5",
-      name: "Suresh",
-      available: true,
-    },
-  ],
-};

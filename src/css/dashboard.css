@@ -1,7 +1,12 @@
 .dashboard-container {
+  overflow-x: scroll;
   display: flex;
   gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+  padding: 2rem;
+  height: 93vh;
+  justify-content: start;
   background-color: #f4f5f8;
 }
+
+html, body {margin: 0; height: 100%; overflow: hidden}
+

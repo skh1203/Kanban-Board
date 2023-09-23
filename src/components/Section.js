@@ -6,18 +6,28 @@ import "../css/section.css";
 const handleAdd = () => {};
 const handleEdit = () => {};
 
-function Section({ data, users, heading }) {
+function Section({ data, heading, groupingType }) {
   return (
     <div className="section-container">
       <SectionHeader
-        name={heading}
-        
+        heading={heading}
         onAddCard={handleAdd}
         onEditSection={handleEdit}
+        count={data?.length || 0}
       />
-      <Card />
-      <Card />
-      <Card />
+      {data?.map((item) => {
+        console.log(item);
+        return (
+          <Card
+            key={item.id}
+            groupingType={groupingType}
+            id={item.id}
+            priority={item.priority}
+            tags={item.tags}
+            title={item.title}
+          />
+        );
+      })}
     </div>
   );
 }

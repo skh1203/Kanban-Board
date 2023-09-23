@@ -3,6 +3,7 @@ import Section from "../components/Section";
 import "../css/dashboard.css";
 import Card from "../components/Card";
 import axios from "axios";
+import Header from "../components/Header";
 
 const STATUS_ARRAY = ["Backlog", "Todo", "In Progress", "Done", "Canceled"];
 const PRIORITIES_ARRAY = ["No Priority", "Low", "Medium", "High", "Urgent"];
@@ -21,6 +22,9 @@ export default function Dashboard() {
 
   return (
     <>
+      <div className="dashboard-header">
+        <Header/>
+      </div>
       <div className="dashboard-container">
         <Section />
         <Section />

@@ -21,6 +21,7 @@ const PRIORITIES_ARRAY = ["No Priority", "Low", "Medium", "High", "Urgent"];
 export default function Dashboard() {
 	const [ogData, setOgData] = useState();
 	const [data, setData] = useState([]);
+  const [done, setDone] = useState(localStorage.getItem('done') || []);
 
 	const [grouping, setGrouping] = useState("status");
 	const [ordering, setOrdering] = useState("priority");

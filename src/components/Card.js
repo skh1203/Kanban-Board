@@ -3,7 +3,7 @@ import "../css/card.css";
 export default function Card() {
   return (
     <>
-      <div className="container">
+      <div className="card_container">
         <div className="card_header">
           <div className="card_title">CAM-11</div>
           <div className="card_user">{/* <img /> */}</div>

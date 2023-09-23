@@ -1,0 +1,24 @@
+.section-icon {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  aspect-ratio: 1;
+  background-color: grey;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-start {
+  justify-content: start;
+}
+
+.justify-end {
+  justify-content: end;
+}

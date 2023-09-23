@@ -1,35 +1,51 @@
+const PRIORITIES_ARRAY = ["No Priority", "Low", "Medium", "High", "Urgent"];
+
 export function groupByStatus(data) {
-  let result = {};
+  let newTickets = {};
   data.tickets.forEach((ticket) => {
-    if (result[ticket.status]) {
-      result[ticket.status].push(ticket);
+    if (newTickets[ticket.status]) {
+      newTickets[ticket.status].push(ticket);
     } else {
-      result[ticket.status] = [ticket];
+      newTickets[ticket.status] = [ticket];
     }
   });
+
+  let result = {};
+  result.tickets = newTickets;
+  result.users = data.users;
   return result;
 }
 
 export function groupByUser(data) {
-  let result = {};
+  let newTickets = {};
   data.tickets.forEach((ticket) => {
-    if (result[ticket.userId]) {
-      result[ticket.userId].push(ticket);
+    const name = data.users.find((user) => user.id === ticket.userId).name;
+    if (newTickets[name]) {
+      newTickets[name].push(ticket);
     } else {
-      result[ticket.userId] = [ticket];
+      newTickets[name] = [ticket];
     }
   });
+
+  let result = {};
+  result.tickets = newTickets;
+  result.users = data.users;
   return result;
 }
 
 export function groupByPriority(data) {
-  let result = {};
+  let newTickets = {};
   data.tickets.forEach((ticket) => {
-    if (result[ticket.priority]) {
-      result[ticket.priority].push(ticket);
+    const priorityName = PRIORITIES_ARRAY[ticket.priority];
+    if (newTickets[priorityName]) {
+      newTickets[priorityName].push(ticket);
     } else {
-      result[ticket.priority] = [ticket];
+      newTickets[priorityName] = [ticket];
     }
   });
+
+  let result = {};
+  result.tickets = newTickets;
+  result.users = data.users;
   return result;
 }

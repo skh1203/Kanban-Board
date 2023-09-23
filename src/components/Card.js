@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../css/card.css";
-export default function Card() {
+export default function Card({ id, title, tags, priority, groupingType }) {
   return (
     <>
       <div className="card_container">

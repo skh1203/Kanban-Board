@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/sectionHeader.css";
 
-function SectionHeader() {
+function SectionHeader({ name, count, onAddCard, onEditSection }) {
   return (
     <div className="flex justify-between">
       <div className="flex justify-start">

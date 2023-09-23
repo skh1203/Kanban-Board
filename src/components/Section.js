@@ -3,10 +3,18 @@ import SectionHeader from "./SectionHeader";
 import Card from "./Card";
 import "../css/section.css";
 
-function Section() {
+const handleAdd = () => {};
+const handleEdit = () => {};
+
+function Section({ data, users, heading }) {
   return (
     <div className="section-container">
-      <SectionHeader />
+      <SectionHeader
+        name={heading}
+        
+        onAddCard={handleAdd}
+        onEditSection={handleEdit}
+      />
       <Card />
       <Card />
       <Card />

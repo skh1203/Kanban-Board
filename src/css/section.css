@@ -1,7 +1,13 @@
 .section-container {
   display: flex;
   flex-direction: column;
-  flex-basis: 24%;
+  flex-basis: 19%;
+}
+
+@media only screen and (max-width: 1920px) {
+  .section-container {
+    flex-basis: 24%;
+  }
 }
 
 @media only screen and (max-width: 1500px) {

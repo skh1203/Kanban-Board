@@ -3,10 +3,14 @@
   display: flex;
   gap: 12px;
   padding: 2rem;
-  height: 93vh;
+  height: 84vh;
   justify-content: start;
   background-color: #f4f5f8;
 }
 
-html, body {margin: 0; height: 100%; overflow: hidden}
-
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
+}

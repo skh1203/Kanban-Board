@@ -21,7 +21,7 @@ const PRIORITIES_ARRAY = ["No Priority", "Low", "Medium", "High", "Urgent"];
 export default function Dashboard() {
 	const [ogData, setOgData] = useState();
 	const [data, setData] = useState([]);
-  const [done, setDone] = useState(localStorage.getItem('done') || []);
+	const [done, setDone] = useState(localStorage.getItem('done') || []);
 
 	const [grouping, setGrouping] = useState("status");
 	const [ordering, setOrdering] = useState("priority");
@@ -29,16 +29,21 @@ export default function Dashboard() {
 	const handleChange = () => {
 		if (!ogData) return;
 		if (grouping === "status") {
+			localStorage.setItem("grouping", "status");
 			setData((prev) => groupByStatus(ogData));
 		} else if (grouping === "user") {
+			localStorage.setItem("grouping", "user");
 			setData((prev) => groupByUser(ogData));
 		} else if (grouping === "priority") {
+			localStorage.setItem("grouping", "priority");
 			setData((prev) => groupByPriority(ogData));
 		}
 
 		if (ordering === "priority") {
+			localStorage.setItem("ordering", "priority");
 			setData((prev) => sortSectionByPriority(prev));
 		} else if (ordering === "title") {
+			localStorage.setItem("ordering", "title");
 			setData((prev) => sortSectionByTitle(prev));
 		}
 	};
@@ -56,13 +61,13 @@ export default function Dashboard() {
 	}, []);
 
 	const getHeading = (item, users) => {
-		
+
 		if (grouping === "status") {
 			return item[0]?.status;
 		} else if (grouping === "user") {
 			return (
 				users.find((user) => user.id === item[0].userId)?.name || "Unknown"
-				
+
 			);
 		} else if (grouping === "priority") {
 			return PRIORITIES_ARRAY[item[0]?.priority];
@@ -78,10 +83,11 @@ export default function Dashboard() {
 				<div className="dashboard-container">
 					{data?.tickets &&
 						data?.tickets?.map((item) => {
-							
+
 							return (
 								<Section
 									key={item.id}
+									users={data.users}
 									heading={getHeading(item, data.users)}
 									data={item}
 									grouping={grouping}

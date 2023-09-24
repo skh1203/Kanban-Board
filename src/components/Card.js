@@ -8,6 +8,10 @@ import {
   FaCheck,
 } from "react-icons/fa";
 // import { FaSliders } from "react-icons/fa";
+
+const userColorMap = new Map();
+let userCounter = 0;
+
 export default function Card({
   id,
   title,
@@ -15,6 +19,7 @@ export default function Card({
   priority,
   groupingType,
   checked,
+  userName
 }) {
   const [check, setCheck] = useState(checked);
   const handleCheckboxChange = (event, id) => {
@@ -40,12 +45,30 @@ export default function Card({
     4: <FaCheck />,
   };
 
+  let nameArr = userName.split(" ");
+  nameArr.push(".");
+  let color = userColorMap.get(userName);
+  if (!color) {
+    userCounter++;
+    let randomColors = ["f2352e", "5ff22e", "ebf22e", "2e6cf2", "f22e90"];
+    const colorIndex = userCounter % randomColors.length;
+    color = randomColors[colorIndex];
+    userColorMap.set(userName, color);
+  }
+  let url =
+    "https://ui-avatars.com/api/?name=" +
+    nameArr[0] +
+    "+" +
+    nameArr[1] +
+    "&background=" +
+    color;
+
   return (
     <>
       <div className="card_container">
         <div className="card_header">
           <div className="card_title">{id}</div>
-          <div className="card_user">{/* <img /> */}</div>
+          <div className="card_user"><img src={url} /></div>
         </div>
         <div className="card_body">
           <div className="card_status">

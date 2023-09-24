@@ -1,6 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../css/card.css";
-export default function Card({ id, title, tags, priority, groupingType }) {
+
+export default function Card({ id, title, tags, priority, groupingType, checked }) {
+	const [check, setCheck]=useState(checked);
+	const handleCheckboxChange = (event,id) => {
+		setCheck((prevValue) => !prevValue);
+		document.getElementById(id).checked = !checked;
+		let checkedId = JSON.parse(localStorage.getItem("checkedID"));
+		console.log(typeof checkedId);
+		if(checkedId.includes(id)){
+			
+			const newArray = checkedId.filter(i => i !== id);
+			localStorage.setItem("checkedID", JSON.stringify(newArray));	
+		}
+		else{
+			checkedId.push(id);
+			localStorage.setItem("checkedID", JSON.stringify(checkedId));
+		}
+		console.log(checkedId);
+	  };
+	  
   return (
 		<>
 			<div className="card_container">
@@ -16,6 +35,8 @@ export default function Card({ id, title, tags, priority, groupingType }) {
 								id={id}
 								type="checkbox"
 								style={{ display: "none" }}
+								checked={check}
+								onChange={(e)=> handleCheckboxChange(e,id)}
 							/>
 							<label className="cbx" for={id}>
 								<span>

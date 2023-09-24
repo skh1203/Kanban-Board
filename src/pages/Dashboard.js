@@ -56,11 +56,13 @@ export default function Dashboard() {
 	}, []);
 
 	const getHeading = (item, users) => {
+		
 		if (grouping === "status") {
 			return item[0]?.status;
 		} else if (grouping === "user") {
 			return (
 				users.find((user) => user.id === item[0].userId)?.name || "Unknown"
+				
 			);
 		} else if (grouping === "priority") {
 			return PRIORITIES_ARRAY[item[0]?.priority];
@@ -76,11 +78,13 @@ export default function Dashboard() {
 				<div className="dashboard-container">
 					{data?.tickets &&
 						data?.tickets?.map((item) => {
+							
 							return (
 								<Section
 									key={item.id}
 									heading={getHeading(item, data.users)}
 									data={item}
+									grouping={grouping}
 								/>
 							);
 						})}

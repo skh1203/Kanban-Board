@@ -5,7 +5,11 @@
   aspect-ratio: 1;
   background-color: grey;
 }
-
+.section-img{
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
 .flex {
   display: flex;
   gap: 1rem;

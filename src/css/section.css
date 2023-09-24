@@ -2,13 +2,22 @@
   display: flex;
   flex-direction: column;
   flex-basis: 19%;
-  min-width: 25%;
+  min-width: 32%;
+}
+
+.section-heading {
+  font-weight: 500;
+  color: #202020;
+}
+
+.section-count {
+  color: #797979;
 }
 
 @media only screen and (max-width: 1920px) {
   .section-container {
     flex-basis: 48%;
-    min-width: 25%;
+    min-width: 32%;
   }
 }
 

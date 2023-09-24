@@ -1,95 +1,140 @@
-.more_box{
-    position: absolute;
-    top: 4rem;
-    left: 2rem;
-    background-color: #fafafa;
-    padding: 1rem;
-    border: 2px solid#d8d8d891;
-    border-radius: 0.5rem;
+.more_box {
+  position: absolute;
+  top: 2.8rem;
+  left: 2rem;
+  z-index: 999;
+
+  background-color: #f8f8f9;
+  padding: 0.8rem;
+  border: 2px solid#d8d8d891;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 2px 10px 57px -6px rgba(0, 0, 0, 0.28);
+  -moz-box-shadow: 2px 10px 57px -6px rgba(0, 0, 0, 0.28);
+  box-shadow: 2px 10px 57px -6px rgba(0, 0, 0, 0.28);
 }
 
-.prop{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 3rem;
-    font-weight: 400;
-    font-size: 0.9rem;
-    padding: 0.2rem;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
+.prop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6rem;
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding: 0.2rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
 }
 
-
-
-.outer{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-    width: 100%;
-    height: 7vh;
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 100%;
+  height: 7vh;
 }
 
-.type{
-    width: 3rem;
+.type {
+  width: 3rem;
+  color: #8a8a8a;
+  font-weight: 500;
+}
+.main_button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  border: 2px solid#d8d8d891;
+  border-radius: 0.2rem;
+  background-color: #fff;
+  /* -webkit-box-shadow: 0px 0px 2px 1px rgba(216, 216, 216, 1);
+  -moz-box-shadow: 0px 0px 2px 1px rgba(216, 216, 216, 1);
+  box-shadow: 0px 0px 2px 1px rgba(216, 216, 216, 1); */
+
+  position: absolute;
+  left: 2rem;
+  left: 2;
+}
+
+.icon {
+  display: flex;
+  justify-content: baseline;
 }
 
 .select-dropdown,
 .select-dropdown * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.select-dropdown option {
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  font-family: "Open Sans", sans-serif;
 }
 
 .select-dropdown {
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #aaaaaaa0;
-    border-radius: 4px;
-    overflow: hidden; /* Clip the child elements, ensures the select won't overflow its container */
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #aaaaaaa0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  overflow: hidden; /*Clip the child elements, ensures the select won't overflow its container */
 }
 
 .select-dropdown select {
-    width: 100%; /* Make sure the select takes full width of its container */
-    font-size: 0.8rem;
-    font-weight: normal;
-    padding: 8px 24px 8px 10px; /* Adjusted padding */
-    border: none;
-    background-color: transparent;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: none;
-    color: #000; /* Default text color; adjust as needed */
-    cursor: pointer;
-    transition: background-color 0.3s ease; 
+  width: 100%; /* Make sure the select takes full width of its container */
+  font-size: 0.8rem;
+  font-family: "Open Sans", sans-serif;
+
+  font-weight: 600;
+  padding: 3px 50px 3px 8px; /* Adjusted padding */
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  color: #000; /* Default text color; adjust as needed */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .select-dropdown select::-ms-expand {
-    display: none; /* Hide the default dropdown arrow in IE/Edge */
+  display: none; /* Hide the default dropdown arrow in IE/Edge */
 }
 
 .select-dropdown select:hover,
 .select-dropdown select:focus {
-    background-color: #f2f2f2;
+  background-color: #ffffff;
 }
 
 .select-dropdown:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 8px;
-    width: 0;
-    height: 0;
-    margin-top: -2px;
-    border-top: 5px solid #aaa;
-    border-right: 5px solid transparent;
-    border-left: 5px solid transparent;
-    transition: border-color 0.3s ease;
+  content: "";
+  position: absolute;
+  top: 50%;
+  font-family: "Open Sans", sans-serif;
+
+  right: 8px;
+  width: 0;
+  height: 0;
+  margin-top: -2px;
+  border-top: 5px solid #aaa;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  transition: border-color 0.3s ease;
 }
 
 .select-dropdown:hover:after,
 .select-dropdown select:hover + :after {
-    border-top-color: #888;
+  border-top-color: #888;
 }

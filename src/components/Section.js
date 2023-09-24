@@ -6,7 +6,12 @@ import "../css/section.css";
 const handleAdd = () => {};
 const handleEdit = () => {};
 
+
+
+
 function Section({ data, heading}) {
+  var checkedIdArr = JSON.parse(localStorage.getItem("checkedID"));
+  console.log(checkedIdArr);
   return (
     <div className="section-container">
       <SectionHeader
@@ -16,14 +21,21 @@ function Section({ data, heading}) {
         count={data?.length || 0}
       />
       {data?.map((item) => {
-        console.log(item);
+        console.log(item); var isChecked = false;
+        console.log(checkedIdArr.includes(item.id));
+        if(checkedIdArr.includes(item.id)){
+          isChecked = true;
+        }
         return (
+
           <Card
             key={item.id}
             id={item.id}
             priority={item.priority}
             tags={item.tags}
             title={item.title}
+            checked={isChecked}
+            
           />
         );
       })}
